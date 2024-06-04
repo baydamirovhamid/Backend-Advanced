@@ -547,3 +547,81 @@ namespace EventHandler
 }
 
 ```
+
+# Concurrency
+*Concurrency* is “doing more than one work at a given time”. While one operation is running, it should be possible for us to do another operation. In general, there is one operation that is running, and meanwhile application is “responsible” enough to allow us to work on another task.
+
+*Concurrency* is crucial for improving responsiveness and performance in modern applications, especially those dealing with I/O-bound operations or user interactions.
+
+
+![Process](https://www.c-sharpcorner.com/article/understanding-concurrency-in-c-sharp/Images/concurrency.gif)
+
+**CPU-Bound Operations**
+
+*Characteristics*:
+
+Consume significant CPU resources for calculations and processing.
+They spend most of their time actively using the CPU.
+Typically involves complex algorithms, data processing, mathematical computations, or cryptography.
+
+Examples:
+
+- Image processing
+- Data compression
+- Matrix computations
+- Scientific simulations
+- Password hashing
+- Handling Techniques
+
+**Parallelism**: Distribute work across multiple CPU cores using the Task Parallel Library (TPL) and techniques like Parallel.For and Parallel.ForEach.
+
+**Thread pools**: Use thread pools to manage multiple threads efficiently, avoiding the overhead of creating and destroying threads for each operation.
+
+**I/O-Bound Operations**
+
+*Characteristics*:
+
+Spend most of their time waiting for input/output operations to complete.
+Involve interactions with external resources like databases, file systems, networks, or user input.
+CPU usage is relatively low during these wait periods.
+
+Examples:
+
+- Reading/writing files
+- Making network calls
+- Accessing databases
+- Handling user input
+- Handling Techniques
+
+**Asynchronous programming**: Use async and await keywords to enable non-blocking operations, allowing other code to execute while waiting for I/O.
+**Asynchronous I/O APIs**: Leverage I/O-bound APIs that support asynchronous operations, such as HttpClient for network requests or FileStream for file I/O.
+
+# What is Parallelism in C#?
+*Parallelism* is an essential concept in modern computing, and it enables us to achieve significant performance gains by performing multiple tasks simultaneously. In C#, developers can leverage several types of parallelism to optimize their code and increase its efficiency. This article will explore the most common types of parallelism in C#, along with examples of their implementation.
+
+- Task Parallelism in C#
+- Data Parallelism in C#
+- Task-Based Asynchronous Pattern (TAP) in C#
+
+# Multithreading
+
+In **multithreaded programming**, the main goal is to run small units of work (methods) by packaging them into threads. This approach allows methods to run in parallel or in an intermittent fashion, sharing processing time.
+
+Here's how it works:
+
+**Core Limitation**: If your computer has 4 cores, it can perform up to 4 tasks simultaneously. However, if you create 10 threads, not all of them will run at the same time because there are only 4 cores. Moreover, some cores are always occupied by the operating system's essential services.
+
+**Role of Multithreading**: By using threads, you ensure that your methods get a chance to access the CPU cores and run. Multithreading doesn't guarantee that methods will run simultaneously on different cores. That's parallel programming's domain. Instead, multithreading allows different tasks to take turns running on the available cores.
+
+**Thread Management**: Threads are managed using *quantum time*, which is a small, random time slot (e.g., 5-15 nanoseconds). The ThreadManager handles the scheduling. It sends threads to the CPU, pauses them when their quantum time is up, and saves their state in Thread Local Storage (TLS). When a thread gets its turn again, it resumes from where it left off.
+
+**Execution Flow**: Once a thread finishes its task, it's removed from the schedule. For instance, if you have 10 methods, you create 10 threads. Each thread gets its turn to run, one after another, managed by the ThreadManager.
+
+In summary, multithreading allows methods to share CPU time efficiently, even if it doesn't mean running them all at once on different cores. This makes your programs more efficient by maximizing the use of available CPU resources.
+
+# Asynchronous Programming
+**Asynchronous Programming** is the process of performing tasks asynchronously. Before moving on to asynchronous programming, let's explain **"synchronous and asynchronous concepts"*. Synchronous execution of a task means that the team does not move on to the next task before the previous task is finished! In asynchronous programming, one job can start and work before it is finished, and a parallelism effect is created. Often novice programmers think that multithreading is the same as asynchronous programming! But these are completely different concepts. We use *asynchronous programming* mainly when connecting to a database, when using some services from the Internet (networking), when reading data from a physical disk, etc. As many know, asynchronous delegates (APM), EAV, and Task API (TPL) are also mainly intended for asynchronous programming processes. Because many developers use asynchronous programming in a wrong way, they get the Multithread effect and think that asynchronous programming creates a Thread! **Asynchronous programming does not create a Thread!!**
+
+If you take a task that requires processor time in Asynchronous API, of course, a new Thread will be created! We should only use asynchronous programming APIs for asynchronous tasks.
+
+So, if any work requires processor time (performs some calculation, consumes processor resources using for, for each), then we should use **multithread** or **parallel programming** (depending on the amount of work). If any operation does not require processor time, If it uses disk, internet, database, etc., then an **asynchronous** model can be used.
