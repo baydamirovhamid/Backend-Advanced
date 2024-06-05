@@ -546,7 +546,7 @@ namespace EventHandler
     }
 }
 
-```C#
+```
 
 # Concurrency
 *Concurrency* is “doing more than one work at a given time”. While one operation is running, it should be possible for us to do another operation. In general, there is one operation that is running, and meanwhile application is “responsible” enough to allow us to work on another task.
