@@ -422,7 +422,7 @@ In practice, we usually don't create delegates every time. The .NET Framework it
 
 **Action delegate**: It doesn't have a return type, meaning it doesn't return any value. It can accept around 16 parameters. Using Action delegates reduces the length of the code and makes the program more readable.
 
-```
+```C#
 using System;
 
 namespace DelegateAction
@@ -447,7 +447,7 @@ namespace DelegateAction
 ```
 **Func delegate**: It has a return type and returns a single value at the end. Like Action delegates, it can also accept around 16 parameters. In the example below, we created a Func delegate with an input parameter of type "Person" and an output parameter (bool). When we run the program, we see that it returns "false" at the end because the last method executed returns false due to the absence of the "@" symbol in the email. The main purpose of Func delegates is to execute the program logic and return a single value at the end, so there's no need to write multiple methods here.
 
-```
+```C#
 using System;
 
 namespace DelegateFunc
@@ -486,7 +486,7 @@ namespace DelegateFunc
 ```
 **Event**: It allows one class or object to notify other classes or objects when something happens. For example, when you subscribe to a YouTube channel, you receive notifications when new videos are uploaded to the channel. An event occurs here. Events require methods that subscribe to this event. What type can be connected to multiple methods? For this, we'll use delegates.
 
-```
+```C#
 using System;
 
 namespace EventHandler
@@ -546,7 +546,7 @@ namespace EventHandler
     }
 }
 
-```
+```C#
 
 # Concurrency
 *Concurrency* is “doing more than one work at a given time”. While one operation is running, it should be possible for us to do another operation. In general, there is one operation that is running, and meanwhile application is “responsible” enough to allow us to work on another task.
